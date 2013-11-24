@@ -1,4 +1,3 @@
-require 'pry'
 
 class Change_Machine
   def initialize
