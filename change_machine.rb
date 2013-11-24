@@ -29,8 +29,9 @@ class Change_Machine
   end
 
   def calc(amount)
-    change_due = amount - @amt_due
-    puts change_due
+    change_due = amount.to_f.round(2) - @amt_due.to_f.round(2)
+    change_due = change_due.to_f.round(2)
+    puts "The change due is #{change_due}"
     change_split(change_due)
     breakdown
   end
@@ -43,21 +44,13 @@ class Change_Machine
     @dollars = amt_hash[:dollar]
     amt_hash[:cents] = amt_arr[1].to_i
     @quarters = (amt_hash[:cents].divmod(@quarter))[0]
-    if @quarters >= 1
-      amt_hash[:cents] = amt_hash[:cents] - (@quarters * @quarter)
-    end
+    amt_hash[:cents] = amt_hash[:cents] - (@quarters * @quarter)
     @dimes = (amt_hash[:cents].divmod(@dime))[0]
-    if @dimes >=1
-      amt_hash[:cents] = amt_hash[:cents] - (@dimes * @dime)
-    end
+    amt_hash[:cents] = amt_hash[:cents] - (@dimes * @dime)
     @nickels = (amt_hash[:cents].divmod(@nickel))[0]
-    if @nickels >= 1
-      amt_hash[:cents] = amt_hash[:cents] - (@nickels * @nickel)
-    end
+    amt_hash[:cents] = amt_hash[:cents] - (@nickels * @nickel)
     @pennies = (amt_hash[:cents].divmod(@penny))[0]
-    if @pennies >= 1
-      amt_hash[:cents] = amt_hash[:cents] - (@pennies * @penny)
-    end
+    amt_hash[:cents] = amt_hash[:cents] - (@pennies * @penny)
   end
 
   def breakdown
